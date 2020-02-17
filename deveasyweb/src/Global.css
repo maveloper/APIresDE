@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+* {
+    text-align-last: center;
+    margin: 12px;
+    padding: 1px;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+html,body, #root {
+    height: 100%;
+}
+
+/*pq dos tons de azul e cinza?*/
+
+body {
+    background:rgb(16, 14, 37);
+    color:rgb(220, 217, 251);
+    -webkit-font-smoothing: antialiased;
+}
+
+body, input, button{
+    font-family: Roboto, sans-serif;
+}
