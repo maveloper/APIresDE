@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState , useEffect} from 'react';
 import './Global.css';
 import './App.css';
 import './Sidebar.css';
@@ -6,10 +6,18 @@ import './Main.css';
 
 
 function App() {
+  const[latitude, setLatitude] = useState('');
+  const[longitude, setLongitude] = useState('');
+
+
+
 useEffect(() =>{
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      console.log(position);
+      const {latitude, longitude } = position.coords;
+
+      setLatitude(latitude);
+      setLongitude(longitude);
     },
     (err) => {
       console.log(err);
@@ -40,12 +48,24 @@ useEffect(() =>{
         <div className="input-group">
           <div className="input-block">
             <label htmlFor="latitude">Latitude</label>
-            <input name="latitude" id= "Latitude" required/>  
+            <input 
+            type="number" 
+            name="latitude" 
+            id= "Latitude" 
+            required 
+            value={latitude}
+            onChange={e => setLatitude(e.targer.value)}/>  
         </div>
 
         <div className="input-block">
             <label htmlFor="longitude">Longitude</label>
-            <input name="longitude" id="longitude" required/>
+            <input 
+            type="number" 
+            name="longitude" 
+            id="longitude" 
+            required 
+            value={longitude}
+            onChange={e => setLongitude(e.targer.value)} />
         </div>
         </div>
  
@@ -82,7 +102,7 @@ useEffect(() =>{
 
          <li className="dev-item">
            <header>
-             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460&v=4" alt="May Santos"/>
+             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460v=4" alt="May Santos"/>
              <div className="user-info">
                <strong>May Santos</strong>
                <span>Node.jS, ReactJS, React Native,Python </span>

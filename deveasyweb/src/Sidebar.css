@@ -1,9 +1,9 @@
 aside{
     width: 320px;
-    background: #084D6E;
-    box-shadow: 0 0 14px 0 rgba(0, 0,0, 0.2);
+    background: #808080;
+    box-shadow: #DCDCDC;
     border-radius: 2px;
-    padding: 30px 20px;
+    padding: 20px 10px;
     float: right;
 
 }
@@ -12,7 +12,7 @@ aside strong {
     font-size: 20px;
     text-align: center;
     display: block;
-    color:rgb(242, 240, 247);
+    columns:#dcdcdc;
 }
 
 
@@ -25,10 +25,10 @@ aside form .input-block + .input-block {
 }
 
 aside form .input-group {
-    margin-top: 20px;
+    margin-top: 10px;
     display: grid;
-    gap: 10px;
-    grid-template-columns: 1lf 1lf;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr;
 }
 
 
@@ -38,18 +38,20 @@ aside form .input-group .input-block {
 
 
 aside form .input-block label {
-    color: #DCDCDC;
+    color: #dcdcdc;
     font-size: 13px;
     font-weight:normal;
     display: block;
 
 }
 
+
+
 aside form .input-block input {
 width: 100%;
 height: 32px;
 font-size: 13px;
-color: #DCDCDC;
+color: #696969;
 border: 0;
 border-bottom: 1px solid #DCDCDC;
 }
@@ -58,7 +60,7 @@ aside form button[type="submit"] {
     width: 100%;
     border: 0;
     margin-top: 30px;
-    background: #140629;
+    background: #696969;
     border-radius: 2px;
     padding: 15px 20px;
     font-size: 16px;
@@ -69,5 +71,5 @@ aside form button[type="submit"] {
   }
   
   aside form button[type="submit"]:hover {
-    background: #5173b3;
+    background: #A9A9A9;
   }

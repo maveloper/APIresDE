@@ -5,7 +5,7 @@ main {
 main ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:20px;
+    grid-area: 20px;
     list-style: none;
 }
 
@@ -17,8 +17,8 @@ main ul {
 
 
 li.dev-item {
-    background: #084D6E;
-    box-shadow: 0 0 14px 0 rgba(0, 0,0, 0.2);
+    background: #A9A9A9;
+    box-shadow: 0 0 14px 0 #DCDCDC;
     border-radius: 2px;
     padding: 30px 20px;
    
@@ -71,5 +71,5 @@ li.dev-item a{
 }
 
 li.dev-item a:hover{
-    color: #e47419;
+    color: #4682B4;
 }

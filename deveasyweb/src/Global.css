@@ -11,11 +11,9 @@ html,body, #root {
     height: 100%;
 }
 
-/*pq dos tons de azul e cinza?*/
-
 body {
-    background:rgb(16, 14, 37);
-    color:rgb(220, 217, 251);
+    background:#C0C0C0;
+    color:#dcdcdc;
     -webkit-font-smoothing: antialiased;
 }
 
