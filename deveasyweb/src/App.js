@@ -1,4 +1,6 @@
 import React, {useState , useEffect} from 'react';
+import api from './services/api';
+
 import './Global.css';
 import './App.css';
 import './Sidebar.css';
@@ -6,6 +8,10 @@ import './Main.css';
 
 
 function App() {
+  const[devs, setDevs] = useState([]);
+
+  const[github_username, setGithubUsername] = useState('');
+  const[techs, setTechs] = useState('');
   const[latitude, setLatitude] = useState('');
   const[longitude, setLongitude] = useState('');
 
@@ -20,7 +26,6 @@ useEffect(() =>{
       setLongitude(longitude);
     },
     (err) => {
-      console.log(err);
     },
     {
       timeout: 30000,
@@ -29,20 +34,57 @@ useEffect(() =>{
 
 },[]);
 
+useEffect(() =>{
+  async function loadDevs() {
+    const response = await api.get('/devs');
+
+    setDevs(response.data);
+  }
+  loadDevs();
+},[]);
+
+
+async function handleSubmit(e) {
+  e.preventDefault()
+
+
+  const response = await api.post('/devs', {
+    github_username,
+    techs,
+    latitude,
+    longitude,
+  })
+ 
+  setGithubUsername('');
+  setTechs('');
+
+  setDevs([...devs, response.data]);
+}
+
 
     return (
    <div id="app">
      <aside>
       <strong>Register</strong>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="input-block">
           <label htmlFor="github_username">Github Username</label>
-            <input name="github_username" id="github_username" required/>
+            <input 
+            name="github_username" 
+            id="github_username" 
+            required
+            value={github_username}
+            onChange={e => setGithubUsername(e.target.value)}/>
         </div>
 
         <div className="input-block">
           <label htmlFor="techs">Your tech skills</label>
-          <input name="techs" id="techs" required/>
+          <input 
+          name="techs" 
+          id="techs" 
+          required
+          value={techs}
+          onChange={e => setTechs(e.target.value)}/>
         </div>
 
         <div className="input-group">
@@ -52,7 +94,7 @@ useEffect(() =>{
             type="number" 
             name="latitude" 
             id= "Latitude" 
-            required 
+            required  
             value={latitude}
             onChange={e => setLatitude(e.targer.value)}/>  
         </div>
@@ -76,57 +118,20 @@ useEffect(() =>{
 
      <main>
        <ul>
-         <li className="dev-item">
+         {devs.map(dev => (
+         <li key={dev.id} className="dev-item">
            <header>
-             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460&v=4" alt="May Santos"/>
+             <img src={dev.avatar_url} alt={dev.name}/>
              <div className="user-info">
-               <strong>May Santos</strong>
-               <span>Node.jS, ReactJS, React Native,Python </span>
+               <strong>{dev.name}</strong>
+               <span>{dev.techs.join(', ')}</span>
              </div>
            </header>
-           <p>JS/ReactJS/Python - I'm a very curious person and passionate about creations, interactivity on multiplatforms and solve problems. Learning React Native</p>
-           <a href="https://github.com/maveloper">Access GitHub profile</a>
+           <p>{dev.bio}</p>
+           <a href={`https://github.com/${dev.github_username}`}>Access GitHub profile</a>
          </li>
-
-         <li className="dev-item">
-           <header>
-             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460&v=4" alt="May Santos"/>
-             <div className="user-info">
-               <strong>May Santos</strong>
-               <span>Node.jS, ReactJS, React Native,Python </span>
-             </div>
-           </header>
-           <p>JS/ReactJS/Python - I'm a very curious person and passionate about creations, interactivity on multiplatforms and solve problems. Learning React Native</p>
-           <a href="https://github.com/maveloper">Access GitHub profile</a>
-         </li>
-
-         <li className="dev-item">
-           <header>
-             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460v=4" alt="May Santos"/>
-             <div className="user-info">
-               <strong>May Santos</strong>
-               <span>Node.jS, ReactJS, React Native,Python </span>
-             </div>
-           </header>
-           <p>JS/ReactJS/Python - I'm a very curious person and passionate about creations, interactivity on multiplatforms and solve problems. Learning React Native</p>
-           <a href="https://github.com/maveloper">Access GitHub profile</a>
-         </li>
-
-         <li className="dev-item">
-           <header>
-             <img src="https://avatars2.githubusercontent.com/u/57489512?s=460&v=4" alt="May Santos"/>
-             <div className="user-info">
-               <strong>May Santos</strong>
-               <span>Node.jS, ReactJS, React Native,Python </span>
-             </div>
-           </header>
-           <p>JS/ReactJS/Python - I'm a very curious person and passionate about creations, interactivity on multiplatforms and solve problems. Learning React Native</p>
-           <a href="https://github.com/maveloper">Access GitHub profile</a>
-         </li>
-
-
+         ) )}
        </ul>
-
      </main>
    </div> 
    
